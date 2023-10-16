@@ -70,11 +70,11 @@ namespace lunOptics.libUsbTree
             {
                 timer.Stop(); // avoid reentrance
 
-                newTree = new InfoNode(rootNodes);
+                newTree = new InfoNode(rootNodes); // only build nodes without filling them (don't waste time here)
 
                 bool isEqual = newTree.isEqual(oldTree);
                 
-                if(!isEqual || DateTime.Now < lastChange + TimeSpan.FromSeconds(5))                
+                if(!isEqual /*|| DateTime.Now < lastChange + TimeSpan.FromSeconds(5)*/)                
                 {
                     //if (!isEqual) lastChange = DateTime.Now;
                     newTree.readDetails();
@@ -86,7 +86,7 @@ namespace lunOptics.libUsbTree
             }
         }
 
-        DateTime lastChange = DateTime.Now;
+        //DateTime lastChange = DateTime.Now;
 
         void UpdateDeviceList()
         {
